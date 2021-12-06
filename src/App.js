@@ -8,14 +8,7 @@ class App extends Component {
     super(props);
 
     this.state = {
-      recording: false,
-      file: null,
-      timer: 0,
-      intervalId:null,
-      phase: 0,
-      audioName: '',
-      nameEntered: true,
-      success: 0,
+      color: "#FFFFFF",
     };
     this.audio = new Audio("./vesper.mp3")
   }
@@ -23,26 +16,13 @@ class App extends Component {
   componentDidMount() {
     axios.get(`https://lighting-backend.herokuapp.com/`).then(res => {
       console.log(res);
+      this.setState({color: res.data});
     })
   }
 
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+      <div className="App" style={{backgroundColor: this.state.color}}>
       </div>
     );
   }
