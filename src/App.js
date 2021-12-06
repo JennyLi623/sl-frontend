@@ -10,13 +10,31 @@ class App extends Component {
     this.state = {
       color: "#FFFFFF",
     };
-    this.audio = new Audio("./vesper.mp3")
   }
 
   componentDidMount() {
+    this.fetchlight = setInterval(this.getColor, 300);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.fetchlight);
+  }
+
+  getColor = () => {
     axios.get(`https://lighting-backend.herokuapp.com/`).then(res => {
-      console.log(res);
-      this.setState({color: res.data});
+      if(parseFloat(res.data) <= -2) {
+        this.setState({color: "#444444"})
+      }
+      else if(parseFloat(res.data) <= -1) {
+        this.setState({color: "#FFBBBB"})
+      }
+      else if (parseFloat(res.data) < 0.2) {
+        this.setState({color: "#FFFFFF"})
+      }
+      else{
+        this.setState({color: "#FFCC88"})
+      }
+      console.log(this.state.color);
     })
   }
 
