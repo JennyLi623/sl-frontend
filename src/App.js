@@ -28,7 +28,7 @@ class App extends Component {
       else if(parseFloat(res.data) <= -1) {
         this.setState({color: "#FFBBBB"})
       }
-      else if (parseFloat(res.data) < 0.2) {
+      else if (parseFloat(res.data) < 0.12) {
         this.setState({color: "#FFFFFF"})
       }
       else{
